@@ -1,14 +1,13 @@
-import express, { Application, NextFunction, Request, Response } from 'express';
+import express, { NextFunction, Request, Response, Router } from 'express';
 import dotenv from 'dotenv';
 import { DataSource } from 'typeorm';
-import { Event } from './entity/event.entity';
 
-const startServer = async (DB: DataSource) => {
+const startServer = async (DB: DataSource, controllers: [Router]) => {
   await DB.initialize()
     .then(() => {
       console.log('Data Source has been initialized!');
     })
-    .catch((err: any) => {
+    .catch((err: unknown) => {
       console.error('Error during Data Source initialization', err);
     });
 
@@ -20,22 +19,13 @@ const startServer = async (DB: DataSource) => {
 
   const app = express();
 
-  app.get('/events', async function (req, res) {
-    try {
-      const users = await DB.getRepository(Event).find();
+  const initializeControllers = (controllers: express.Router[]) => {
+    controllers.forEach((controller) => {
+      app.use('/', controller);
+    });
+  };
 
-      console.log(users);
-      res.json(users);
-    } catch (err) {
-      console.error(err);
-    }
-  });
-
-  app.post('/events', async function (req, res) {
-    const user = await DB.getRepository(Event).create(req.body);
-    const results = await DB.getRepository(Event).save(user);
-    return res.send(results);
-  });
+  initializeControllers(controllers);
 
   app.use((err: any, req: Request, res: Response, next: NextFunction) => {
     if (err.response?.status === 400) {
