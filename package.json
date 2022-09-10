@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx tsc",
     "start": "node dist/server",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon dist/server\""
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon dist/index\""
   },
   "keywords": [],
   "author": "",
