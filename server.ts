@@ -1,18 +1,28 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import AppDataSource from './config/database';
 
-const path = require('path');
+AppDataSource.initialize()
+  .then(() => {
+    console.log('Data Source has been initialized!');
 
-dotenv.config();
+    const path = require('path');
 
-let port = typeof process.env.PORT === 'string' && parseFloat(process.env.PORT);
+    dotenv.config();
 
-const app = express();
+    let port =
+      typeof process.env.PORT === 'string' && parseFloat(process.env.PORT);
 
-if (!port) {
-  port = 3000;
-}
+    const app = express();
 
-app.get('/', (req, res) => res.send('ok'));
+    if (!port) {
+      port = 3000;
+    }
 
-app.listen(port, () => console.log(`Server is running on port ${port}`));
+    app.get('/', (req, res) => res.send('ok'));
+
+    app.listen(port, () => console.log(`Server is running on port ${port}`));
+  })
+  .catch((err: any) => {
+    console.error('Error during Data Source initialization', err);
+  });
