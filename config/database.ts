@@ -1,4 +1,5 @@
 import { DataSource } from 'typeorm';
+import { Event } from '../entity/event.entity';
 
 export const AppDataSource = new DataSource({
   type: 'postgres',
@@ -9,7 +10,7 @@ export const AppDataSource = new DataSource({
   database: process.env.POSTGRES_DB || 'postgres',
   synchronize: true,
   logging: true,
-  entities: [],
+  entities: [Event],
   subscribers: [],
   migrations: [],
 });
