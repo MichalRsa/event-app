@@ -1,5 +1,7 @@
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import { DataSource } from 'typeorm';
+import CreateEventDto from '../data-transfer-object/createEvent.dto';
+import validationMiddleware from '../middleware/validationMiddleware';
 import { eventRepository } from '../repository/EventRepository';
 
 const eventController = (DB: DataSource) => {
@@ -8,7 +10,7 @@ const eventController = (DB: DataSource) => {
 
   const intializeRoutes = () => {
     router.get(path, getAllEvents);
-    router.post(path, createEvent);
+    router.post(path, validationMiddleware(CreateEventDto), createEvent);
   };
 
   const getAllEvents = async (req: Request, res: Response) => {
@@ -16,10 +18,18 @@ const eventController = (DB: DataSource) => {
 
     res.json(events);
   };
-  const createEvent = async (req: Request, res: Response) => {
-    const results = await eventRepository.createEvent(req.body);
+  const createEvent = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const results = await eventRepository.createEvent(req.body);
 
-    res.send(results);
+      res.send(results);
+    } catch (err) {
+      next(err);
+    }
   };
 
   intializeRoutes();

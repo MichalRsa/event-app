@@ -1,3 +1,4 @@
+import { IsDate, IsEmail } from 'class-validator';
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
@@ -14,8 +15,10 @@ export class Event {
   @Column({
     unique: true,
   })
+  @IsEmail()
   email: string;
 
   @Column('date')
-  date: string;
+  @IsDate()
+  date: Date;
 }
