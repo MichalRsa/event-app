@@ -1,6 +1,7 @@
 import express, { NextFunction, Request, Response, Router } from 'express';
 import dotenv from 'dotenv';
 import { DataSource } from 'typeorm';
+import errorMiddleware from './middleware/errorMiddleware';
 
 const startServer = async (DB: DataSource, controllers: [Router]) => {
   await DB.initialize()
@@ -27,14 +28,7 @@ const startServer = async (DB: DataSource, controllers: [Router]) => {
 
   initializeControllers(controllers);
 
-  app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-    if (err.response?.status === 400) {
-      res
-        .status(400)
-        .send({ error: err.response.data.error.message, status: 400 });
-      console.error('====================== status 400');
-    }
-  });
+  app.use(errorMiddleware);
 
   if (!port) {
     port = 3000;
