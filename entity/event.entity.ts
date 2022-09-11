@@ -12,9 +12,7 @@ export class Event {
   @Column()
   lastName: string;
 
-  @Column({
-    unique: true,
-  })
+  @Column()
   @IsEmail()
   email: string;
 
