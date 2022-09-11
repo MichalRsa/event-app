@@ -1,6 +1,5 @@
 import express, { Request, Response } from 'express';
 import { DataSource } from 'typeorm';
-import { Event } from '../entity/event.entity';
 import { eventRepository } from '../repository/EventRepository';
 
 const eventController = (DB: DataSource) => {
@@ -18,7 +17,7 @@ const eventController = (DB: DataSource) => {
     res.json(events);
   };
   const createEvent = async (req: Request, res: Response) => {
-    const results = eventRepository.createEvent(req.body);
+    const results = await eventRepository.createEvent(req.body);
 
     res.send(results);
   };
