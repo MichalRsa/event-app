@@ -3,6 +3,7 @@ import { DataSource } from 'typeorm';
 import CreateEventDto from '../data-transfer-object/createEvent.dto';
 import validationMiddleware from '../middleware/validationMiddleware';
 import { eventRepository } from '../repository/EventRepository';
+import eventService from '../service/eventService';
 
 const eventController = (DB: DataSource) => {
   const path = '/events';
@@ -24,7 +25,8 @@ const eventController = (DB: DataSource) => {
     next: NextFunction
   ) => {
     try {
-      const results = await eventRepository.createEvent(req.body);
+      const event = req.body;
+      const results = await eventService.createEvent(event);
 
       res.send(results);
     } catch (err) {
