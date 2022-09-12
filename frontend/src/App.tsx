@@ -1,11 +1,18 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import './App.css';
+import Nav from './components/Nav';
+import Footer from './components/Footer';
+import Main from './components/Main';
 
 function App() {
-  const [count, setCount] = useState(0);
+  return (
+    <div className='w-full min-h-screen flex flex-col'>
+      <Nav />
+      <div className='max-w-screen-lg mx-auto  grow'>
+        <Main />
+      </div>
 
-  return <div className='App'></div>;
+      <Footer />
+    </div>
+  );
 }
 
 export default App;
