@@ -1,5 +1,5 @@
 import Event from './Event';
-import { EventData } from './Main';
+import { EventData } from '../views/Main';
 
 const EventsList = ({ events }: { events: EventData[] }) => {
   return (
