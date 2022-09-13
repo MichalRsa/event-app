@@ -1,5 +1,6 @@
 import { Formik, Form, useField } from 'formik';
 import * as Yup from 'yup';
+import axios from 'axios';
 
 const MyTextInput = ({ label, ...props }: any) => {
   const [field, meta] = useField(props);
@@ -16,7 +17,7 @@ const MyTextInput = ({ label, ...props }: any) => {
   );
 };
 
-const AddEventForm = () => {
+const AddEventForm = ({ getEvents }: { getEvents: () => Promise<void> }) => {
   return (
     <div className='w-96 bg-slate-100 rounded-lg  mx-auto text-zinc-600 '>
       <div className='w-10/12 mx-auto py-6'>
@@ -42,11 +43,13 @@ const AddEventForm = () => {
               .required('Required'),
             date: Yup.date().min(new Date(), 'Must be a future date'),
           })}
-          onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
-              setSubmitting(false);
-            }, 400);
+          onSubmit={async (values, { setSubmitting }) => {
+            const res = await axios.post('http://localhost:3000/events', {
+              ...values,
+            });
+
+            setSubmitting(false);
+            getEvents();
           }}
         >
           <Form>
