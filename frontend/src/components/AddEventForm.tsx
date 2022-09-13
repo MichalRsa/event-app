@@ -1,21 +1,7 @@
-import { Formik, Form, useField } from 'formik';
+import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
-
-const MyTextInput = ({ label, ...props }: any) => {
-  const [field, meta] = useField(props);
-  return (
-    <div className='flex flex-col my-4'>
-      <label className=' py-1' htmlFor={props.id || props.name}>
-        {label}
-      </label>
-      <input className='p-2 text-xs' {...field} {...props} />
-      {meta.touched && meta.error ? (
-        <div className='text-sm text-red-500 p-1'>{meta.error}</div>
-      ) : null}
-    </div>
-  );
-};
+import TextInput from './TextInput';
 
 const AddEventForm = ({ getEvents }: { getEvents: () => Promise<void> }) => {
   return (
@@ -53,28 +39,28 @@ const AddEventForm = ({ getEvents }: { getEvents: () => Promise<void> }) => {
           }}
         >
           <Form>
-            <MyTextInput
+            <TextInput
               label='First Name'
               name='firstName'
               type='text'
               placeholder='Jane'
             />
 
-            <MyTextInput
+            <TextInput
               label='Last Name'
               name='lastName'
               type='text'
               placeholder='Doe'
             />
 
-            <MyTextInput
+            <TextInput
               label='Email Address'
               name='email'
               type='email'
               placeholder='michalrosa@mail.com'
             />
 
-            <MyTextInput label='Date' name='date' type='datetime-local' />
+            <TextInput label='Date' name='date' type='datetime-local' />
 
             <button
               type='submit'
