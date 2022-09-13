@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import { DataSource } from 'typeorm';
 import errorMiddleware from './middleware/errorMiddleware';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 
 const startServer = async (DB: DataSource, controllers: [Router]) => {
   await DB.initialize()
@@ -18,6 +19,8 @@ const startServer = async (DB: DataSource, controllers: [Router]) => {
   let port = Number(process.env.POSTGRES_PORT);
 
   const app = express();
+
+  app.use(cors());
 
   app.use(bodyParser.json());
 
