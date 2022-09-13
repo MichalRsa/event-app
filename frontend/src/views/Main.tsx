@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import AddEventForm from './AddEventForm';
-import EventsList from './EventsList';
+import AddEventForm from '../components/AddEventForm';
+import EventsList from '../components/EventsList';
 import axios from 'axios';
 
 export interface EventData {

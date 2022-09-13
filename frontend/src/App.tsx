@@ -1,6 +1,6 @@
 import Nav from './layouts/Nav';
 import Footer from './layouts/Footer';
-import Main from './components/Main';
+import Main from './views/Main';
 
 function App() {
   return (
