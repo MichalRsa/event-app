@@ -4,7 +4,6 @@ import { RequestHandler } from 'express';
 import HttpException from '../exceptions/HttpException';
 
 function validationMiddleware(type: any): RequestHandler {
-  console.log('invoking validation middleware');
   return (req, res, next) => {
     validate(plainToInstance(type, req.body)).then(
       (errors: ValidationError[]) => {

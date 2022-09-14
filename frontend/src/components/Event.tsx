@@ -10,7 +10,6 @@ interface eventProps {
 const Event = ({ eventItem }: { eventItem: eventProps }) => {
   const { firstName, lastName, email, date } = eventItem;
   const formatedDate = format(new Date(date), 'MM.dd.yyyy H:m');
-  console.log(date, formatedDate);
   return (
     <div
       data-testid='event'
