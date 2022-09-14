@@ -12,7 +12,10 @@ const Event = ({ eventItem }: { eventItem: eventProps }) => {
   const formatedDate = format(new Date(date), 'MM.dd.yyyy H:m');
   console.log(date, formatedDate);
   return (
-    <div className=' border bg-slate-200 w-96 m-8 p-4 rounded-lg'>
+    <div
+      data-testid='event'
+      className=' border bg-slate-200 w-96 m-8 p-4 rounded-lg'
+    >
       <header className='flex justify-between font-medium pb-8'>
         <span>
           {firstName} {lastName}
