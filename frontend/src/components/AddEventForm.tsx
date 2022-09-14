@@ -27,21 +27,17 @@ const AddEventForm = ({ getEvents }: { getEvents: () => Promise<void> }) => {
             email: Yup.string()
               .email('Invalid email address')
               .required('Required'),
-            date: Yup.date().min(new Date(), 'Must be a future date'),
+            date: Yup.date()
+              .min(new Date(), 'Must be a future date')
+              .required('Required'),
           })}
-          onSubmit={async (values, { setSubmitting }) => {
-            const res = await axios.post('http://localhost:3000/events', {
-              ...values,
-            });
-
-            setSubmitting(false);
-            getEvents();
-          }}
+          onSubmit={handleSubmit}
         >
           <Form>
             <TextInput
               label='First Name'
               name='firstName'
+              id='firstName'
               type='text'
               placeholder='Jane'
             />
@@ -49,6 +45,7 @@ const AddEventForm = ({ getEvents }: { getEvents: () => Promise<void> }) => {
             <TextInput
               label='Last Name'
               name='lastName'
+              id='lastName'
               type='text'
               placeholder='Doe'
             />
@@ -56,11 +53,17 @@ const AddEventForm = ({ getEvents }: { getEvents: () => Promise<void> }) => {
             <TextInput
               label='Email Address'
               name='email'
+              id='email'
               type='email'
               placeholder='michalrosa@mail.com'
             />
 
-            <TextInput label='Date' name='date' type='datetime-local' />
+            <TextInput
+              label='Date'
+              name='date'
+              id='date'
+              type='datetime-local'
+            />
 
             <button
               type='submit'
