@@ -16,7 +16,7 @@ export class Event {
   @IsEmail()
   email: string;
 
-  @Column('date')
+  @Column({ type: 'timestamptz' })
   @IsDateString()
   date: string;
 }
