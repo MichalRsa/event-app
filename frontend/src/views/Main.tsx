@@ -58,7 +58,7 @@ const Main = () => {
     getEvents();
   }, []);
   return (
-    <div className=''>
+    <div>
       <div>
         <AddEventForm handleSubmit={handleSubmit} />
       </div>
