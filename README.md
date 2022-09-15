@@ -1,5 +1,7 @@
 # Event App
 
+![app screen](app.png)
+
 **App that allows users to add events to the database, and display them.**
 
 Simple app functionality allows to focus on setting up proper structures for full-stack application.
