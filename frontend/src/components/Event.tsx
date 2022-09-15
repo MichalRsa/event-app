@@ -21,7 +21,6 @@ const Event = ({ eventItem }: { eventItem: eventProps }) => {
       timeZone,
     }
   );
-  console.log(formatedDate);
   return (
     <div
       data-testid='event'

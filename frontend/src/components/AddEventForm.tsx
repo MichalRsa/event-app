@@ -1,31 +1,9 @@
 import { Formik, Form, FormikState } from 'formik';
 import * as Yup from 'yup';
+import { HandleSubmit } from '../views/Main';
 import TextInput from './TextInput';
 
-const AddEventForm = ({
-  handleSubmit,
-}: {
-  handleSubmit: (
-    values: {
-      [key: string]: string;
-    },
-    {
-      setSubmitting,
-      resetForm,
-    }: {
-      setSubmitting: (isSubmitting: boolean) => void;
-      resetForm: (
-        nextState?:
-          | Partial<
-              FormikState<{
-                [key: string]: string;
-              }>
-            >
-          | undefined
-      ) => void;
-    }
-  ) => Promise<void>;
-}) => {
+const AddEventForm = ({ handleSubmit }: { handleSubmit: HandleSubmit }) => {
   return (
     <div className='w-96 bg-slate-100 rounded-lg  mx-auto text-zinc-600 my-8'>
       <div className='w-10/12 mx-auto py-6'>

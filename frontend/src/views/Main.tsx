@@ -4,6 +4,27 @@ import EventsList from '../components/EventsList';
 import axios from 'axios';
 import { FormikState } from 'formik';
 
+export type HandleSubmit = (
+  values: {
+    [key: string]: string;
+  },
+  {
+    setSubmitting,
+    resetForm,
+  }: {
+    setSubmitting: (isSubmitting: boolean) => void;
+    resetForm: (
+      nextState?:
+        | Partial<
+            FormikState<{
+              [key: string]: string;
+            }>
+          >
+        | undefined
+    ) => void;
+  }
+) => Promise<unknown>;
+
 export interface EventData {
   date: string;
   email: string;
@@ -15,23 +36,9 @@ export interface EventData {
 const Main = () => {
   const [events, setEvents] = useState<EventData[]>([]);
 
-  const handleSubmit = async (
-    values: { [key: string]: string },
-    {
-      setSubmitting,
-      resetForm,
-    }: {
-      setSubmitting: (isSubmitting: boolean) => void;
-      resetForm: (
-        nextState?:
-          | Partial<
-              FormikState<{
-                [key: string]: string;
-              }>
-            >
-          | undefined
-      ) => void;
-    }
+  const handleSubmit: HandleSubmit = async (
+    values,
+    { setSubmitting, resetForm }
   ) => {
     await axios.post('http://localhost:3000/events', {
       ...values,
