@@ -1,6 +1,5 @@
 import { Formik, Form, FormikState } from 'formik';
 import * as Yup from 'yup';
-import axios from 'axios';
 import TextInput from './TextInput';
 
 const AddEventForm = ({
@@ -28,7 +27,7 @@ const AddEventForm = ({
   ) => Promise<void>;
 }) => {
   return (
-    <div className='w-96 bg-slate-100 rounded-lg  mx-auto text-zinc-600 '>
+    <div className='w-96 bg-slate-100 rounded-lg  mx-auto text-zinc-600 my-8'>
       <div className='w-10/12 mx-auto py-6'>
         <h2 className='text-center'>Add new event</h2>
         <Formik
