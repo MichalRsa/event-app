@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": ">=17.8.0",
+    "pnpm": ">=7.11.0"
+  },
   "scripts": {
     "test": "jest",
     "build": "npx tsc",
