@@ -8,7 +8,11 @@
     "build": "npx tsc",
     "start": "node dist/server",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon dist/index\"",
-    "dev:ts": "nodemon index.ts"
+    "dev:ts": "nodemon index.ts",
+    "typeorm:generate-static": "npx typeorm-ts-node-commonjs migration:generate migrations -d ./config/database.ts",
+    "typeorm:generate": "sh -c 'npx typeorm-ts-node-commonjs  migration:generate ./migrations/$0 -d ./config/database.ts '",
+    "typeorm:run": "npx typeorm-ts-node-commonjs migration:run -d ./config/database.ts",
+    "typeorm:revert": "npx typeorm-ts-node-commonjs migration:revert -d ./config/database.ts"
   },
   "keywords": [],
   "author": "",
