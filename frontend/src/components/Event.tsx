@@ -1,4 +1,5 @@
-import { format } from 'date-fns';
+import { parseISO } from 'date-fns';
+import { format, utcToZonedTime } from 'date-fns-tz';
 interface eventProps {
   date: string;
   email: string;
@@ -9,7 +10,18 @@ interface eventProps {
 
 const Event = ({ eventItem }: { eventItem: eventProps }) => {
   const { firstName, lastName, email, date } = eventItem;
-  const formatedDate = format(new Date(date), 'MM.dd.yyyy H:m');
+
+  const ISOTime = parseISO(date);
+
+  const timeZone = 'utc';
+  const formatedDate = format(
+    utcToZonedTime(ISOTime, timeZone),
+    'yyyy-MM-dd kk:mm',
+    {
+      timeZone,
+    }
+  );
+  console.log(formatedDate);
   return (
     <div
       data-testid='event'
