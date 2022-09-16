@@ -10,15 +10,13 @@ Simple app functionality allows to focus on setting up proper structures for ful
 
 - [Event App](#event-app)
 - [Table of Contents](#table-of-contents)
-	- [Structure](#structure)
-	- [Backend](#backend)
-	- [Frontend](#frontend)
-	- [Running app locally](#running-app-locally)
-		- [BE](#be)
-		- [FE](#fe)
-	- [Running Tests](#running-tests)
-		- [BE](#be-1)
-		- [FE](#fe-1)
+  - [Structure](#structure)
+  - [Backend](#backend)
+  - [Frontend](#frontend)
+  - [Running app locally](#running-app-locally)
+  - [Running Tests](#running-tests)
+    - [BE](#be)
+    - [FE](#fe)
 
 ## Structure
 
@@ -43,41 +41,8 @@ For testing the client, app uses vitest with react-testing-library.
 
 ## Running app locally
 
-When developing app, you will have to run seperate commands in root directory - server, and frontend directory - client.
-
-### BE
-
-     In root directory run following commands:
-
-- install dependencies
-
-  > `pnpm install`
-
-- run Postgresql database container
-
+- run docker contanairs
   > `docker-compose up`
-
-- run backend
-
-  > `pnpm dev:ts`
-
-- run migrations
-  > `pnpm typeorm:run`
-
-### FE
-
-    In root directory
-
-- navigate to frontend directory
-
-  > `cd frontend`
-
-- install dependencies
-
-  > `pnpm install`
-
-- run client
-  > `pnpm build`
 
 ## Running Tests
 
