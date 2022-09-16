@@ -8,7 +8,7 @@ const AppDataSource = new DataSource({
   username: process.env.POSTGRES_USER || 'postgres',
   password: process.env.POSTGRES_PASSWORD || 'postgres',
   database: process.env.POSTGRES_DB || 'postgres',
-  synchronize: false,
+  synchronize: true,
   logging: true,
   entities: [Event],
   subscribers: [],
