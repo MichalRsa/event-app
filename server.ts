@@ -6,17 +6,17 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 
 const startServer = async (DB: DataSource, controllers: [Router]) => {
-  await DB.initialize()
-    .then(() => {
-      console.log('Data Source has been initialized!');
-    })
-    .catch((err: unknown) => {
-      console.error('Error during Data Source initialization', err);
-    });
+  // await DB.initialize()
+  //   .then(() => {
+  //     console.log('Data Source has been initialized!');
+  //   })
+  //   .catch((err: unknown) => {
+  //     console.error('Error during Data Source initialization', err);
+  //   });
 
   dotenv.config();
 
-  let port = Number(process.env.POSTGRES_PORT);
+  let port = Number(process.env.PORT);
 
   const app = express();
 
