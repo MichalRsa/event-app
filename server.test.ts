@@ -3,8 +3,6 @@ import server from './server';
 import AppDataSource from './config/testDatabase';
 import eventController from './controller/eventController';
 
-console.log('NODE_ENV', process.env.NODE_ENV);
-
 afterAll(() => {
   AppDataSource.destroy();
 });

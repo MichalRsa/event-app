@@ -4,8 +4,6 @@ import { Event } from '../entity/event.entity';
 
 const dbConfig: any = config.get('database');
 
-console.log(config.util.getEnv('NODE_ENV'));
-
 const AppDataSource = new DataSource({
   type: 'postgres',
   host: dbConfig.host,
