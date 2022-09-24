@@ -1,0 +1,12 @@
+{
+  "database": {
+    "host": "host.docker.internal",
+    "port": 8000,
+    "username": "postgres",
+    "password": "postgres",
+    "database": "postgres",
+    "synchronize": true,
+    "logging": true,
+    "subscribers": []
+  }
+}

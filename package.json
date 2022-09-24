@@ -8,11 +8,11 @@
     "pnpm": ">=7.11.0"
   },
   "scripts": {
-    "test": "jest",
+    "test": "NODE_ENV=local-development jest",
     "build": "npx tsc",
     "start": "node dist/server",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon dist/index\"",
-    "dev:ts": "nodemon index.ts",
+    "dev:ts": "NODE_ENV=local-development nodemon index.ts",
     "typeorm:generate-static": "npx typeorm-ts-node-commonjs migration:generate migrations -d ./config/database.ts",
     "typeorm:generate": "sh -c 'npx typeorm-ts-node-commonjs  migration:generate ./migrations/$0 -d ./config/database.ts '",
     "typeorm:run": "npx typeorm-ts-node-commonjs migration:run -d ./config/database.ts",
@@ -35,10 +35,12 @@
     "typeorm": "^0.3.9"
   },
   "devDependencies": {
+    "@types/config": "^3.3.0",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
     "@types/jest": "^29.0.0",
     "@types/node": "^18.7.16",
+    "@types/supertest": "^2.0.12",
     "concurrently": "^7.4.0",
     "jest": "^29.0.3",
     "nodemon": "^2.0.19",
