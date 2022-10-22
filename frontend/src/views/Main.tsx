@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
 import AddEventForm from '../components/AddEventForm';
 import EventsList from '../components/EventsList';
-import axios from 'axios';
 import { FormikState } from 'formik';
+import { useMutation, useQuery } from 'react-query';
+import { getEvents } from '../api/queries';
+import { setEvent } from '../api/mutations';
 
 export type HandleSubmit = (
   values: {
@@ -34,18 +35,17 @@ export interface EventData {
 }
 
 const Main = () => {
-  const [events, setEvents] = useState<EventData[]>([]);
+  const { data, refetch } = useQuery('events', getEvents, { initialData: [] });
+
+  const mutation = useMutation(setEvent, { onSuccess: () => refetch() });
 
   const handleSubmit: HandleSubmit = async (
     values,
     { setSubmitting, resetForm }
   ) => {
-    await axios.post('http://localhost:3000/events', {
-      ...values,
-    });
+    mutation.mutate(values);
 
     setSubmitting(false);
-    getEvents();
     resetForm({
       values: {
         firstName: '',
@@ -56,21 +56,13 @@ const Main = () => {
     });
   };
 
-  const getEvents = async () => {
-    const res = await axios.get('http://localhost:3000/events');
-    setEvents(res.data);
-  };
-
-  useEffect(() => {
-    getEvents();
-  }, []);
   return (
     <div>
       <div>
         <AddEventForm handleSubmit={handleSubmit} />
       </div>
       <div>
-        <EventsList events={events} />
+        <EventsList events={data} />
       </div>
     </div>
   );
