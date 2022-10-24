@@ -2,6 +2,7 @@ import Nav from './layouts/Nav';
 import Footer from './layouts/Footer';
 import Main from './views/Main';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 function App() {
   const queryClient = new QueryClient();
@@ -14,6 +15,8 @@ function App() {
         </div>
         <Footer />
       </div>
+
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }
