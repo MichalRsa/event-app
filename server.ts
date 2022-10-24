@@ -40,7 +40,7 @@ const startServer = async (DB: DataSource, controllers: [Router]) => {
 
   app.get('/', (req, res) => res.send('ok'));
 
-  app.listen(port, () => console.log(`Server is running on port ${port}`));
+  return app;
 };
 
 export default startServer;

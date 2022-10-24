@@ -1,6 +1,6 @@
+import config from 'config';
 import { DataSource } from 'typeorm';
 import { Event } from '../entity/event.entity';
-import config from 'config';
 
 const dbConfig: any = config.get('database');
 

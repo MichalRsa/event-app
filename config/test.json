@@ -1,0 +1,12 @@
+{
+  "database": {
+    "host": "127.0.0.1",
+    "port": 9000,
+    "username": "postgres",
+    "password": "postgres",
+    "database": "postgres",
+    "synchronize": true,
+    "logging": false,
+    "subscribers": []
+  }
+}
