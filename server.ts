@@ -5,7 +5,7 @@ import errorMiddleware from './middleware/errorMiddleware';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 
-const startServer = async (DB: DataSource, controllers: [Router]) => {
+const startServer = async (DB: DataSource, controllers: Router[]) => {
   await DB.initialize()
     .then(() => {
       console.log('Data Source has been initialized!');
