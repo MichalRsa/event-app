@@ -4,6 +4,7 @@ import { DataSource } from 'typeorm';
 import errorMiddleware from './middleware/errorMiddleware';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 
 const startServer = async (DB: DataSource, controllers: Router[]) => {
   await DB.initialize()
@@ -23,6 +24,7 @@ const startServer = async (DB: DataSource, controllers: Router[]) => {
   app.use(cors());
 
   app.use(bodyParser.json());
+  app.use(cookieParser());
 
   const initializeControllers = (controllers: express.Router[]) => {
     controllers.forEach((controller) => {
