@@ -24,7 +24,10 @@ const AuthenticationController = () => {
   ) => {
     try {
       const userData: UserDto = request.body;
-      const user = await authenticationService.registration(userData);
+      const { user, cookie } = await authenticationService.registration(
+        userData
+      );
+      response.setHeader('Set-Cookie', [cookie]);
       response.send(user);
     } catch (err) {
       next(err);
@@ -38,8 +41,9 @@ const AuthenticationController = () => {
   ) => {
     try {
       const logInData: LogInDto = request.body;
-      const user = await authenticationService.loggingIn(logInData);
+      const { user, cookie } = await authenticationService.loggingIn(logInData);
 
+      response.setHeader('Set-Cookie', [cookie]);
       response.send(user);
     } catch (err) {
       next(err);
