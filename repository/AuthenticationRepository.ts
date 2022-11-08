@@ -5,15 +5,6 @@ import { User } from '../entity/user.entity';
 export const authenticationRepository = AppDataSource.getRepository(
   User
 ).extend({
-  // TODO: CONSIDER MAKING ANOTHER REPOSITORY FOR THIS QUERY EG. UserRepository.ts
-  getUserByEmail(email: UserDto['email']) {
-    return this.createQueryBuilder('user')
-      .where('user.email = :email', {
-        email,
-      })
-      .getOne();
-  },
-
   registerUser(user: UserDto) {
     return this.createQueryBuilder().insert().into(User).values(user).execute();
   },

@@ -10,6 +10,7 @@ import DataStoredInToken from '../interface/DataStoredInToken.interface';
 import config from 'config';
 import { User } from '../entity/user.entity';
 import SomethindWentWrongException from '../exceptions/SomethingWentWrongException';
+import { UserRepository } from '../repository/UserRepository';
 
 const dbConfig: any = config.get('jwt');
 
@@ -30,7 +31,7 @@ const createCookie = (tokenData: TokenData) => {
 };
 
 const registration = async (userData: UserDto) => {
-  if (await authenticationRepository.getUserByEmail(userData.email))
+  if (await UserRepository.getUserByEmail(userData.email))
     throw new UserWithThatEmailAlreadyExistsException(userData.email);
 
   const hashedPassword = await bcrypt.hash(userData.password, 10);
@@ -38,7 +39,7 @@ const registration = async (userData: UserDto) => {
     ...userData,
     password: hashedPassword,
   });
-  const user = await authenticationRepository.getUserByEmail(userData.email);
+  const user = await UserRepository.getUserByEmail(userData.email);
   if (typeof user !== 'object' || user === null)
     throw new SomethindWentWrongException();
 
@@ -49,7 +50,7 @@ const registration = async (userData: UserDto) => {
 };
 
 const loggingIn = async (logInData: LogInDto) => {
-  const user = await authenticationRepository.getUserByEmail(logInData.email);
+  const user = await UserRepository.getUserByEmail(logInData.email);
   if (!user) throw new WrongCredentialsException();
 
   const isPasswordMatching = await bcrypt.compare(
