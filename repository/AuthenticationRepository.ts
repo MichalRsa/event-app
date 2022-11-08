@@ -9,16 +9,12 @@ export const authenticationRepository = AppDataSource.getRepository(
   getUserByEmail(email: UserDto['email']) {
     return this.createQueryBuilder('user')
       .where('user.email = :email', {
-        email: email,
+        email,
       })
       .getOne();
-    // return this.createQueryBuilder('user').getMany();
   },
 
   registerUser(user: UserDto) {
     return this.createQueryBuilder().insert().into(User).values(user).execute();
-    //         ...userData,
-    //         password: hashedPassword,
-    //       });
   },
 });
