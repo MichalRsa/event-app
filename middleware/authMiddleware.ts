@@ -9,11 +9,11 @@ import { UserRepository } from '../repository/UserRepository';
 
 const jwtConfig: any = config.get('jwt');
 
-async function authMiddleware(
+const authMiddleware = async (
   request: RequestWithUser,
   response: Response,
   next: NextFunction
-) {
+) => {
   const cookies = request.cookies;
   if (cookies && cookies.Authorization) {
     const secret = jwtConfig.secret;
@@ -36,6 +36,6 @@ async function authMiddleware(
   } else {
     next(new AuthenticationTokenMissingException());
   }
-}
+};
 
 export default authMiddleware;
