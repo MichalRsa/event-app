@@ -1,6 +1,7 @@
 import express, { NextFunction, Request, Response } from 'express';
 import { DataSource } from 'typeorm';
 import CreateEventDto from '../data-transfer-object/createEvent.dto';
+import authMiddleware from '../middleware/authMiddleware';
 import validationMiddleware from '../middleware/validationMiddleware';
 import { eventRepository } from '../repository/EventRepository';
 import eventService from '../service/eventService';
@@ -10,6 +11,7 @@ const eventController = (DB: DataSource) => {
   const router = express.Router();
 
   const intializeRoutes = () => {
+    router.use(path, authMiddleware);
     router.get(path, getAllEvents);
     router.post(path, validationMiddleware(CreateEventDto), createEvent);
   };
