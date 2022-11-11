@@ -1,8 +1,8 @@
 import { useField } from 'formik';
 
-type Label = 'First Name' | 'Last Name' | 'Email Address' | 'Date';
-type Name = 'firstName' | 'lastName' | 'email' | 'date';
-type Type = 'datetime-local' | 'text' | 'email';
+type Label = 'First Name' | 'Last Name' | 'Email Address' | 'Date' | 'Password';
+type Name = 'firstName' | 'lastName' | 'email' | 'date' | 'password';
+type Type = 'datetime-local' | 'text' | 'email' | 'password';
 
 interface TextInputProps {
   label: Label;

@@ -8,5 +8,8 @@
     "synchronize": true,
     "logging": true,
     "subscribers": []
+  },
+  "jwt": {
+    "secret": "jwt-secret"
   }
 }

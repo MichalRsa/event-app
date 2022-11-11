@@ -1,8 +1,40 @@
 import Nav from './layouts/Nav';
 import Footer from './layouts/Footer';
 import Main from './views/Main';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import Auth from './views/Auth';
+import { SignInForm, SignUpForm } from './components/SignForm';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Main />,
+  },
+  {
+    path: '/auth',
+    element: <Auth />,
+    children: [
+      {
+        index: true,
+        element: <Navigate to='login' />,
+      },
+      {
+        path: 'login',
+        element: <SignInForm />,
+      },
+      {
+        path: 'register',
+        element: <SignUpForm />,
+      },
+    ],
+  },
+]);
 
 function App() {
   const queryClient = new QueryClient();
@@ -11,7 +43,7 @@ function App() {
       <div className='w-full min-h-screen flex flex-col bg-gray-50'>
         <Nav />
         <div className='max-w-screen-lg w-2/3 mx-auto  grow'>
-          <Main />
+          <RouterProvider router={router} />
         </div>
         <Footer />
       </div>
