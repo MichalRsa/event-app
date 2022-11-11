@@ -4,11 +4,16 @@ import Main from './views/Main';
 import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import Auth from './views/Auth';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Main />,
+  },
+  {
+    path: '/auth',
+    element: <Auth />,
   },
 ]);
 
