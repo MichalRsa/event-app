@@ -1,46 +1,51 @@
 import { Formik, Form } from 'formik';
-import { useState } from 'react';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 import * as Yup from 'yup';
 import { HandleSubmit } from '../views/Main';
 import TextInput from './TextInput';
 
-type SignType = 'register' | 'login';
+const SignForm = () => {
+  const { pathname } = useLocation();
+  const location = pathname.split('/')[2];
 
-const SignForm = ({ handleSubmit }: { handleSubmit: HandleSubmit }) => {
-  const [signType, setSignType] = useState<SignType>('login');
   return (
     <div className='w-96 bg-slate-100 rounded-lg  mx-auto text-zinc-600 my-8'>
       <div className='w-10/12 mx-auto py-6'>
         <div className='flex justify-between'>
-          <button
-            onClick={() => setSignType('login')}
+          <Link
+            to='login'
             className={` rounded-lg px-10 py-2 text-sky-100 ${
-              signType === 'login' ? 'bg-slate-600' : 'bg-slate-400'
+              location === 'login' ? 'bg-slate-600' : 'bg-slate-400'
             }`}
           >
             Sign in
-          </button>
-          <button
-            onClick={() => setSignType('register')}
+          </Link>
+          <Link
+            to='register'
             className={` rounded-lg px-10 py-2 text-sky-100 ${
-              signType === 'register' ? 'bg-slate-600' : 'bg-slate-400'
+              location === 'register' ? 'bg-slate-600' : 'bg-slate-400'
             }`}
           >
             Sign up
-          </button>
+          </Link>
         </div>
-        {signType === 'register' ? (
-          <SignUpForm handleSubmit={handleSubmit} />
-        ) : (
-          <SignInForm handleSubmit={handleSubmit} />
-        )}
+        <Outlet />
       </div>
     </div>
   );
 };
 export default SignForm;
 
-const SignInForm = ({ handleSubmit }: { handleSubmit: HandleSubmit }) => {
+export const SignInForm = () => {
+  const handleSubmit: HandleSubmit = async (
+    values,
+    { setSubmitting, resetForm }
+  ) => {
+    setSubmitting(false);
+    resetForm({
+      values,
+    });
+  };
   return (
     <Formik
       initialValues={{
@@ -83,7 +88,16 @@ const SignInForm = ({ handleSubmit }: { handleSubmit: HandleSubmit }) => {
     </Formik>
   );
 };
-const SignUpForm = ({ handleSubmit }: { handleSubmit: HandleSubmit }) => {
+export const SignUpForm = () => {
+  const handleSubmit: HandleSubmit = async (
+    values,
+    { setSubmitting, resetForm }
+  ) => {
+    setSubmitting(false);
+    resetForm({
+      values,
+    });
+  };
   return (
     <Formik
       initialValues={{

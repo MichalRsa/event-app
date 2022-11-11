@@ -1,10 +1,15 @@
 import Nav from './layouts/Nav';
 import Footer from './layouts/Footer';
 import Main from './views/Main';
-import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import Auth from './views/Auth';
+import { SignInForm, SignUpForm } from './components/SignForm';
 
 const router = createBrowserRouter([
   {
@@ -14,6 +19,20 @@ const router = createBrowserRouter([
   {
     path: '/auth',
     element: <Auth />,
+    children: [
+      {
+        index: true,
+        element: <Navigate to='login' />,
+      },
+      {
+        path: 'login',
+        element: <SignInForm />,
+      },
+      {
+        path: 'register',
+        element: <SignUpForm />,
+      },
+    ],
   },
 ]);
 
